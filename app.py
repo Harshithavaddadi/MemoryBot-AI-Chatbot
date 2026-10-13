@@ -12,7 +12,12 @@ st.set_page_config(
 st.title("🤖 MemoryBot AI")
 st.caption("Your personal AI assistant with conversation memory")
 
-api_key = os.environ.get("GEMINI_API_KEY")
+api_key = None
+
+try:
+    api_key = st.secrets["GEMINI_API_KEY"]
+except Exception:
+    api_key = os.environ.get("GEMINI_API_KEY")
 
 if not api_key:
     st.error("Gemini API key not found. Load it from Colab Secrets.")
